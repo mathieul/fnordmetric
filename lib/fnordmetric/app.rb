@@ -128,7 +128,8 @@ class FnordMetric::App < Sinatra::Base
 
   post '/events' do
     halt 400, 'please specify the event_type (_type)' unless params["_type"]
-    track_event((8**32).to_s(36), parse_params(params))
+    uid = rand(8**32).to_s(36)
+    track_event(uid, parse_params(params))
   end
 
   @@public_files.each do |public_file, public_file_type|
