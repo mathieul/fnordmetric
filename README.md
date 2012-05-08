@@ -105,8 +105,8 @@ The fast way: Add your event directly to the redis-based queue.
 uuid = (8**32).to_s(36)
 event = { :_type => "unicorn_seen" }.to_json
 
-redis.set("fnordmetric-event-#{my_uuid}", event)
-redis.expire("fnordmetric-event-#{my_uuid}", 60)
+redis.set("fnordmetric-event-#{uuid}", event)
+redis.expire("fnordmetric-event-#{uuid}", 60)
 redis.lpush("fnordmetric-queue", uuid)
 ```
 
@@ -163,10 +163,6 @@ Call these methods from the event-handler block
 
 ----
 
-### Options: Gauges ###
-
-----
-
 ### Options: Widgets ###
 
 + `[autoupdate]` auto-refresh the timeline every n secs (0 turns autoupdate off)
@@ -185,7 +181,15 @@ BarsWidget
 
 ----
 
-### JSON API ###
+
+Resources
+----------
+
++ [PHP API for FnordMetric (github.com/leemachin/fnordmetric-php-api)](https://github.com/leemachin/fnordmetric-php-api)
++ [Python API for FnordMetric (github.com/sholiday/pyfnordmetric)](https://github.com/sholiday/pyfnordmetric)
++ [FnordMetric and C (Blog/Howto)](http://johnmurray.io/log/2012/01/19/FnordMetrics-and-C%23.md)
++ [FnordMetric HowTo in russian](http://www.pvsm.ru/ruby/2723)
++ [The "fnordmetric" google group](http://groups.google.com/group/fnordmetric)
 
 
 Examples
@@ -343,6 +347,8 @@ Contributors
 + Kacper Bielecki (http://github.com/kazjote)
 + John Murray (http://github.com/JohnMurray)
 + Lars Gierth (http://github.com/lgierth)
++ Ross Kaffenberger (http://github.com/rossta)
++ Kunal Modi (http://github.com/kunalmodi)
 
 To contribute, please fork this repository, make your changes and run the 
 specs, commit them to your github repository and send me a pull request.
