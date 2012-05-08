@@ -126,11 +126,13 @@ class FnordMetric::App < Sinatra::Base
     dashboard.to_json
   end
 
-  post '/events' do
+  events_proc = Proc.new do
     halt 400, 'please specify the event_type (_type)' unless params["_type"]
     uid = rand(8**32).to_s(36)
     track_event(uid, parse_params(params))
   end
+  get  '/events', &events_proc
+  post '/events', &events_proc
 
   @@public_files.each do |public_file, public_file_type|
     get "/#{public_file}" do
